@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Form from './Form';
 import './App.css';
 
 const teamMemberList = [{}]
@@ -26,10 +27,12 @@ function App() {
       return
     };
 
+    setTeamMembers([newTeamMember, ...teamMembers]);
     setTeamMembers(teamMembers.concat(newTeamMember));
     setFormValues({name: "", email: "", role: ""})
   }
 
+    
 
   return (
     <div className='container'>
@@ -40,6 +43,18 @@ function App() {
         update={updateForm}
         submit={submitForm}
       />
+
+      {
+        teamMembers.map((teamMember, index) => {
+          return (
+            <div key={index}>
+              <h3>{teamMember.name}</h3>
+              <p>{teamMember.email}</p>
+              <p>{teamMember.role}</p>
+            </div>
+          )
+        })
+      }
     </div>
   );
 }
